@@ -1,3 +1,9 @@
-Original code base for the vasslengine version 3.2.2 as retrieved from
+Modified source code to work on pivoting a group of game pieces.
+
+Feature is:
+http://www.vassalengine.org/tracker/show_bug.cgi?id=1943
+
+Base is:
+vasslengine version 3.2.2 as retrieved from
 http://www.vassalengine.org/download.php
 http://downloads.sourceforge.net/vassalengine/VASSAL-3.2.2-src.zip
