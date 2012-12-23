@@ -76,6 +76,7 @@ import VASSAL.counters.TableInfo;
 import VASSAL.counters.Translate;
 import VASSAL.counters.TriggerAction;
 import VASSAL.counters.UsePrototype;
+import VASSAL.counters.Wheel;
 import VASSAL.tools.SequenceEncoder;
 
 /**
@@ -166,6 +167,11 @@ public class BasicCommandEncoder implements CommandEncoder, Buildable {
         return new Pivot(type, inner);
       }
     });
+    decoratorFactories.put(Wheel.ID, new DecoratorFactory() {
+        public Decorator createDecorator(String type, GamePiece inner) {
+          return new Wheel(type, inner);
+        }
+      });
     decoratorFactories.put(NonRectangular.ID, new DecoratorFactory() {
       public Decorator createDecorator(String type, GamePiece inner) {
         return new NonRectangular(type, inner);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="J2SE-1.5" key="org.eclipse.jdt.ui.last.selected.execution.enviroment"/>
+	<item value="filter_imports;" key="filters_last_used"/>
 	<item value="/Users/pawlowsm/Desktop/dba/vassal/vassalengine" key="org.eclipse.jdt.ui.last.external.project"/>
+	<item value="J2SE-1.5" key="org.eclipse.jdt.ui.last.selected.execution.enviroment"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="true" key="group_libraries"/>
 		<item value="false" key="linkWithEditor"/>

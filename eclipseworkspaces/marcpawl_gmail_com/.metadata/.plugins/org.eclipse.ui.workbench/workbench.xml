@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="65" version="2.0">
+<workbench progressCount="53" version="2.0">
 <workbenchAdvisor/>
 <window height="768" width="1024" x="114" y="41">
 <fastViewData fastViewLocation="1024"/>
@@ -34,6 +34,10 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
@@ -46,8 +50,30 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/vassalengine/src/VASSAL/launch/ModuleManager.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3035" selectionTopPixel="315"/>
 </editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Wheel.java" partName="Wheel.java" path="/Users/pawlowsm/Desktop/dba/vassal/vassalengine/src/VASSAL/counters/Wheel.java" title="Wheel.java" tooltip="vassalengine/src/VASSAL/counters/Wheel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/vassalengine/src/VASSAL/counters/Wheel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5430" selectionTopPixel="1695"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Pivot.java" partName="Pivot.java" path="/Users/pawlowsm/Desktop/dba/vassal/vassalengine/src/VASSAL/counters/Pivot.java" title="Pivot.java" tooltip="vassalengine/src/VASSAL/counters/Pivot.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/vassalengine/src/VASSAL/counters/Pivot.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="5" selectionOffset="1740" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BasicCommandEncoder.java" partName="BasicCommandEncoder.java" path="/Users/pawlowsm/Desktop/dba/vassal/vassalengine/src/VASSAL/build/module/BasicCommandEncoder.java" title="BasicCommandEncoder.java" tooltip="vassalengine/src/VASSAL/build/module/BasicCommandEncoder.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/vassalengine/src/VASSAL/build/module/BasicCommandEncoder.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="5" selectionOffset="6399" selectionTopPixel="1290"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PieceDefiner.java" partName="PieceDefiner.java" path="/Users/pawlowsm/Desktop/dba/vassal/vassalengine/src/VASSAL/counters/PieceDefiner.java" title="PieceDefiner.java" tooltip="vassalengine/src/VASSAL/counters/PieceDefiner.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/vassalengine/src/VASSAL/counters/PieceDefiner.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3902" selectionTopPixel="705"/>
+</editor>
 </editors>
 <views>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="org.eclipse.jdt.ui.JavaSearchResultPage" org.eclipse.jdt.search.resultpage.grouping="3" org.eclipse.jdt.search.resultpage.limit="1000" org.eclipse.jdt.search.resultpage.limit_enabled="TRUE" org.eclipse.jdt.search.resultpage.sorting="1" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2"/>
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+</viewState>
+</view>
 <view id="org.eclipse.debug.ui.DebugView" partName="Debug">
 <viewState/>
 </view>
@@ -66,7 +92,8 @@
 <view id="com.ibm.team.apt.internal.ui.myWorkView" partName="My Work"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>&#x0A;<category IMemento.internal.id="Warnings (1 item)"/>
+<expanded>
+<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="84" org.eclipse.ui.ide.markerType="114" org.eclipse.ui.ide.pathField="144" org.eclipse.ui.ide.resourceField="114" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -214,6 +241,7 @@
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="com.ibm.magnolia.workItemExplorer"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.search.ui.views.SearchView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
 <fastViewBars/>
@@ -247,15 +275,15 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="254" ratioRight="762" relationship="2" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.36525172" ratioLeft="370" ratioRight="643" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.74885845" ratioLeft="492" ratioRight="165" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
 <page content="com.ibm.magnolia.workItemExplorer" label="Work Items"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
-<page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
 <page content="com.ibm.team.collaboration.ui.internal.chatView" label="LabelNotFound"/>
@@ -266,6 +294,7 @@
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
@@ -415,6 +444,10 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/vassalengine/src/VASSAL/launch/Editor.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/vassalengine/src/VASSAL/launch/Launcher.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/vassalengine/src/VASSAL/launch/ModuleManager.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/vassalengine/src/VASSAL/counters/Wheel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/vassalengine/src/VASSAL/counters/Pivot.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/vassalengine/src/VASSAL/build/module/BasicCommandEncoder.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/vassalengine/src/VASSAL/counters/PieceDefiner.java"/>
 </editors>
 <item historyLabel="Editor.java" index="0">
 <position/>
@@ -488,6 +521,24 @@
 <item historyLabel="Editor.java" index="0">
 <position info="not_deleted" x="1812" y="0"/>
 </item>
+<item historyLabel="ModuleManager.java" index="2">
+<position info="not_deleted" x="3035" y="0"/>
+</item>
+<item historyLabel="Wheel.java" index="3">
+<position info="not_deleted" x="7774" y="5"/>
+</item>
+<item historyLabel="Pivot.java" index="4">
+<position info="not_deleted" x="1740" y="5"/>
+</item>
+<item historyLabel="BasicCommandEncoder.java" index="5">
+<position info="not_deleted" x="6399" y="5"/>
+</item>
+<item historyLabel="PieceDefiner.java" index="6">
+<position info="not_deleted" x="3902" y="0"/>
+</item>
+<item historyLabel="Wheel.java" index="3">
+<position info="not_deleted" x="5430" y="0"/>
+</item>
 <item active="true" historyLabel="ModuleManager.java" index="2">
 <position info="not_deleted" x="3035" y="0"/>
 </item>
@@ -512,6 +563,18 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PieceDefiner.java" tooltip="vassalengine/src/VASSAL/counters/PieceDefiner.java">
+<persistable path="/vassalengine/src/VASSAL/counters/PieceDefiner.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BasicCommandEncoder.java" tooltip="vassalengine/src/VASSAL/build/module/BasicCommandEncoder.java">
+<persistable path="/vassalengine/src/VASSAL/build/module/BasicCommandEncoder.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Pivot.java" tooltip="vassalengine/src/VASSAL/counters/Pivot.java">
+<persistable path="/vassalengine/src/VASSAL/counters/Pivot.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Wheel.java" tooltip="vassalengine/src/VASSAL/counters/Wheel.java">
+<persistable path="/vassalengine/src/VASSAL/counters/Wheel.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ModuleManager.java" tooltip="vassalengine/src/VASSAL/launch/ModuleManager.java">
 <persistable path="/vassalengine/src/VASSAL/launch/ModuleManager.java"/>
 </file>

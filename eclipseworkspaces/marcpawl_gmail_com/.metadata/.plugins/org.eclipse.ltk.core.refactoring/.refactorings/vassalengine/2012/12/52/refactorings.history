@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Pivot.java&apos; to &apos;vassalengine/src/VASSAL.counters&apos;&#x0A;- Original project: &apos;vassalengine&apos;&#x0A;- Destination element: &apos;vassalengine/src/VASSAL.counters&apos;&#x0A;- Original element: &apos;VASSAL.counters.Pivot.java&apos;" description="Copy compilation unit" destination="/src&lt;VASSAL.counters" element1="/src&lt;VASSAL.counters{Pivot.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1356278119876" units="1" version="1.0"/>
+</session>

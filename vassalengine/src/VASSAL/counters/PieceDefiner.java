@@ -113,6 +113,7 @@ public class PieceDefiner extends JPanel implements HelpWindowExtension {
       availableModel.addElement(new ActionButton());
       availableModel.addElement(new FreeRotator());
       availableModel.addElement(new Pivot());
+      availableModel.addElement(new Wheel());
       availableModel.addElement(new Hideable());
       availableModel.addElement(new Obscurable());
       availableModel.addElement(new SendToLocation());
