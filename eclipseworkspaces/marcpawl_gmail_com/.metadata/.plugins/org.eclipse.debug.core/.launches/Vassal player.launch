@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/vassalengine/src/VASSAL/launch/Player.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="VASSAL.launch.Player"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="--standalone /Users/pawlowsm/Desktop/dba/vassal/modules/DeBellisVassalus/DBV2.74.vmod"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="vassalengine"/>
+</launchConfiguration>
