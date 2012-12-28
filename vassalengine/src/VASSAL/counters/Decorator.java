@@ -51,6 +51,58 @@ public abstract class Decorator implements GamePiece, StateMergeable, PropertyNa
 
   public Decorator() {
   }
+  
+  /**
+   * Perform the action for the command.
+   * @param keyCommand Command to execute.
+   * @return null if there is no decorator that will perform the command,
+   * otherwise the result of executing the command.
+   */
+  public Command execute(KeyCommand keyCommand)
+  {
+	  Command command = this.myExecute(keyCommand);
+	  if (command == null && this.dec != null) {
+			  command = this.dec.myExecute(keyCommand);
+	  }
+	  if (command == null && this.piece != null) {
+		  command = this.piece.myExecute(keyCommand);		  
+	  }
+	  return command;
+  }
+  
+  /**
+   * Perform the action for the command only on the specific trait.
+   * @param keyCommand Command to execute.
+   * @return null if there is no decorator that will perform the command,
+   * otherwise the result of executing the command.
+   * <p>
+   * Classes that derive from {@link Decorator} should override this
+   * method.
+   */
+  public Command myExecute(KeyCommand keyCommand)
+  {
+	  return null;
+  }
+
+  /** 
+   * Retrieve the key command that matches the name.
+   * 
+   * @param name Name that the key command should have.
+   * @return First key command in the decorators that matches the name.
+   * null if there is no command whose name equals the parameter.
+   */
+  public KeyCommand getKeyCommandFromName(String name)
+  {
+      KeyCommand[] keyCommands = this.getKeyCommands();
+      for (KeyCommand keyCommand : keyCommands) {
+    	  String keyCommandName = keyCommand.getName();
+    	  if (name.equals(keyCommandName)) {
+    		  return keyCommand;
+    	  }
+      }
+      return null;
+  }
+
 
   /** Set the inner GamePiece */
   public void setInner(GamePiece p) {

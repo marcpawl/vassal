@@ -81,6 +81,18 @@ public interface GamePiece extends PropertySource {
 
   public void setParent(Stack s);
 
+  
+  /**
+   * Perform the action for the command only on the specific trait.
+   * @param keyCommand Command to execute.
+   * @return null if there is no decorator that will perform the command,
+   * otherwise the result of executing the command.
+   * <p>
+   * Classes that derive from {@link Decorator} should override this
+   * method.
+   */
+  public Command myExecute(KeyCommand keyCommand);
+
   /**
    * Keyboard events are forward to this method when a piece is selected
    * The GamePiece can respond in any way it likes

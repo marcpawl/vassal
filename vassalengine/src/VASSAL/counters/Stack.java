@@ -704,4 +704,10 @@ public class Stack implements GamePiece, StateMergeable {
       throw new UnsupportedOperationException();
     }
   }
+
+  public Command myExecute(KeyCommand keyCommand) {
+	  return null;
+  }
+  
+  
 }

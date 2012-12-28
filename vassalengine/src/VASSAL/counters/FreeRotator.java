@@ -133,7 +133,8 @@ public class FreeRotator extends Decorator
     setInner(inner);
   }
 
-  public String getName() {
+
+public String getName() {
     return piece.getName();
   }
 
@@ -442,6 +443,42 @@ public class FreeRotator extends Decorator
     return commands;
   }
 
+  /** 
+   * Rotate Clockwise.
+   * @return Command that will reproduce the clockwise rotation.
+   */
+  private Command rotateCW() {
+	  Command c;
+	  final ChangeTracker tracker = new ChangeTracker(this);
+	  angleIndex = (angleIndex + 1) % validAngles.length;
+	  c = tracker.getChangeCommand();
+	  return c;
+  }
+
+  /**
+   * Rotate counter clockwise.
+   * @return Command that will reproduce the clockwise rotation.
+   */
+  private Command rotateCCW() {
+	  Command c;
+	  final ChangeTracker tracker = new ChangeTracker(this);
+	  angleIndex = (angleIndex - 1 + validAngles.length) % validAngles.length;
+	  c = tracker.getChangeCommand();
+	  return c;
+  }
+
+  @Override
+  public Command myExecute(KeyCommand keyCommand)
+  {
+	if  (keyCommand == this.rotateCWCommand) {
+		return rotateCW();
+	} else if (keyCommand == this.rotateCCWCommand) {
+		return rotateCCW();
+	} else {
+		return null;
+	}
+  }
+  
   public Command myKeyEvent(KeyStroke stroke) {
     myGetKeyCommands();
     Command c = null;
@@ -449,14 +486,10 @@ public class FreeRotator extends Decorator
       beginInteractiveRotate();
     }
     else if (rotateCWCommand.matches(stroke)) {
-      final ChangeTracker tracker = new ChangeTracker(this);
-      angleIndex = (angleIndex + 1) % validAngles.length;
-      c = tracker.getChangeCommand();
+      c = rotateCW();
     }
     else if (rotateCCWCommand.matches(stroke)) {
-      final ChangeTracker tracker = new ChangeTracker(this);
-      angleIndex = (angleIndex - 1 + validAngles.length) % validAngles.length;
-      c = tracker.getChangeCommand();
+      c = rotateCCW();
     }
     // for random rotation
     else if (rotateRNDCommand.matches(stroke)) {
@@ -478,7 +511,7 @@ public class FreeRotator extends Decorator
     return c;
   }
 
-  public void beginInteractiveRotate() {
+public void beginInteractiveRotate() {
     startPosition = getPosition();
     startMap = getMap();
     startMap.pushMouseListener(this);

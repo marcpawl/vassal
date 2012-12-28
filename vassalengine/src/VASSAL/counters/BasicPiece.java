@@ -733,4 +733,10 @@ public class BasicPiece implements TranslatablePiece, StateMergeable, PropertyNa
     l.add(DECK_NAME);
     return l;
   }
+
+  public Command myExecute(KeyCommand keyCommand) {
+	  return null;
+  }
+  
+  
 }

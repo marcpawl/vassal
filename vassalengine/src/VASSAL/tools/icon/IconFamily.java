@@ -515,7 +515,7 @@ public class IconFamily extends AbstractConfigurable {
     /**
      * Constructor to Configure the scalable icon;
      *
-     * @param key
+     * @param leftKey
      * @param name
      * @param testElementName
      */

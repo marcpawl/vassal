@@ -37,7 +37,7 @@ public class KeyCommandSubMenu extends KeyCommand {
                            TranslatablePiece i18nPiece) {
     super(name, NamedKeyStroke.NULL_KEYSTROKE, target, i18nPiece);
   }
-
+  
   public void actionPerformed(ActionEvent evt) {
   }
 

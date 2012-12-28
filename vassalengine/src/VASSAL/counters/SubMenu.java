@@ -53,14 +53,15 @@ public class SubMenu extends Decorator implements TranslatablePiece {
     mySetType(type);
     setInner(inner);
   }
+  
 
   public String getDescription() {
-    if ("Sub-Menu".equals(getMenuName())) {
-      return "Sub-Menu";
-    }
-    else {
-      return "Sub-Menu:  "+getMenuName();
-    }
+	  if ("Sub-Menu".equals(getMenuName())) {
+		  return "Sub-Menu";
+	  }
+	  else {
+		  return "Sub-Menu:  "+getMenuName();
+	  }
   }
 
   public HelpFile getHelpFile() {

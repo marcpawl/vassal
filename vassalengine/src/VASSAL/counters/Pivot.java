@@ -76,7 +76,7 @@ public class Pivot extends Decorator implements TranslatablePiece {
   public String getDescription() {
     return "Can Pivot";
   }
-
+  
   public HelpFile getHelpFile() {
     return HelpFile.getReferenceManualPage("Pivot.htm");
   }
@@ -128,35 +128,7 @@ public class Pivot extends Decorator implements TranslatablePiece {
     Command c = null;
     if (pivotCommand.matches(stroke)) {
       if (fixedAngle) {
-        ChangeTracker t = new ChangeTracker(this);
-        double oldAngle = rotator.getAngle();
-        rotator.setAngle(oldAngle - angle);
-        double newAngle = rotator.getAngle();
-        if (getMap() != null) {
-          setOldProperties();
-          Point pos = getPosition();
-          pivotPoint(pos, -Math.PI * oldAngle / 180.0, -Math.PI * newAngle / 180.0);
-          GamePiece outer = Decorator.getOutermost(this);
-          if (!Boolean.TRUE.equals(outer.getProperty(Properties.IGNORE_GRID))) {
-            pos = getMap().snapTo(pos);
-          }
-          outer.setProperty(Properties.MOVED, Boolean.TRUE);
-          c = t.getChangeCommand();
-          MoveTracker moveTracker = new MoveTracker(outer);
-          getMap().placeOrMerge(outer, pos);
-          c = c.append(moveTracker.getMoveCommand());
-          MovementReporter r = new MovementReporter(c);
-          Command reportCommand = r.getReportCommand();
-          if (reportCommand != null) {
-            reportCommand.execute();
-          }
-          c = c.append(reportCommand);
-          c = c.append(r.markMovedPieces());
-          getMap().ensureVisible(getMap().selectionBoundsOf(outer));
-        }
-        else {
-          c = t.getChangeCommand();
-        }
+        c = fixedAngle();
       }
       else if (getMap() != null) {
         setOldProperties();
@@ -174,6 +146,40 @@ public class Pivot extends Decorator implements TranslatablePiece {
       c.append(Decorator.getOutermost(this).keyEvent(getMap().getMoveKey()));
     }
     return c;
+  }
+
+  private Command fixedAngle() {
+	  Command c;
+	  ChangeTracker t = new ChangeTracker(this);
+	  double oldAngle = rotator.getAngle();
+	  rotator.setAngle(oldAngle - angle);
+	  double newAngle = rotator.getAngle();
+	  if (getMap() != null) {
+		  setOldProperties();
+		  Point pos = getPosition();
+		  pivotPoint(pos, -Math.PI * oldAngle / 180.0, -Math.PI * newAngle / 180.0);
+		  GamePiece outer = Decorator.getOutermost(this);
+		  if (!Boolean.TRUE.equals(outer.getProperty(Properties.IGNORE_GRID))) {
+			  pos = getMap().snapTo(pos);
+		  }
+		  outer.setProperty(Properties.MOVED, Boolean.TRUE);
+		  c = t.getChangeCommand();
+		  MoveTracker moveTracker = new MoveTracker(outer);
+		  getMap().placeOrMerge(outer, pos);
+		  c = c.append(moveTracker.getMoveCommand());
+		  MovementReporter r = new MovementReporter(c);
+		  Command reportCommand = r.getReportCommand();
+		  if (reportCommand != null) {
+			  reportCommand.execute();
+		  }
+		  c = c.append(reportCommand);
+		  c = c.append(r.markMovedPieces());
+		  getMap().ensureVisible(getMap().selectionBoundsOf(outer));
+	  }
+	  else {
+		  c = t.getChangeCommand();
+	  }
+	  return c;
   }
 
   /**
