@@ -20,14 +20,18 @@
 package VASSAL.counters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.KeyStroke;
@@ -42,10 +46,53 @@ import VASSAL.command.Command;
 import VASSAL.command.NullCommand;
 
 public class KeyBufferTest 
-{	
+{
+	/** 
+	 * Return the command, and all its sub-commands (recursively).
+	 * @param command Command to retrieve sub-commands from.
+	 * @param result Location to add commands to.
+	 */
+	private void flatten(Command command, List<Command> result)
+	{
+		result.add(command);
+		Command[] subCommands = command.getSubCommands();
+		for (Command sub : subCommands) {
+			flatten(sub, result);
+		}
+	}
+	
+	/** 
+	 * Return the command, and all its sub-commands (recursively).
+	 * @param command Command to retrieve sub-commands from.
+	 * @return All the mentioned commands.
+	 */
+	private Command[] flatten(Command command)
+	{
+		ArrayList<Command> results = new ArrayList<Command>(4);
+		flatten(command, results);
+		return results.toArray(new Command[0]);
+	}
+	
+	
+	/** 
+	 * Verify that a command and its sub-commands (recursively) equal
+	 * the expected commands.
+	 * @param expected Commands that are to be found.
+	 * @param actual Command that is to be compared. 
+	 */
+	private void asserEquals(
+			Command expected[],
+			Command actual) 
+	{
+		Command[] actualCommands = flatten(actual);
+		assertEquals(expected.length, actualCommands.length );
+		for (int i=0; i<expected.length; ++i) {
+			assertEquals(expected[i], actualCommands[i]);
+		}
+	}
+	
 	class MockPieceSorterRetriever implements PieceSorterRetriever
 	{
-
 		public Comparator<GamePiece> getPieceSorter() {
 			return new Comparator<GamePiece>() {
 
@@ -114,6 +161,10 @@ public class KeyBufferTest
 
 		public Command myExecute(KeyCommand keyCommand) {
 			throw new Error("Method should not be called in test");
+		}
+
+		public Command groupKeyEvent(KeyStroke stroke, List<GamePiece> targets) {
+			return null;
 		}
 
 		public Command keyEvent(KeyStroke stroke) {
@@ -254,6 +305,101 @@ public class KeyBufferTest
 		assertTrue(boundsChecker.pieces.contains("2after"));
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testCommandResultFromEachPieceIsReturnedByKeyCommand()
+	{		
+		// Setup
+		final Mockery context = new Mockery();
+		final GamePiece piece1 = context.mock(GamePiece.class, "piece1");
+		final GamePiece piece2 = context.mock(GamePiece.class, "piece2");
+		final IMap map = context.mock(IMap.class, "map");
+		final BoundsTracker boundsTracker = new BoundsTracker();
+		final Comparator<GamePiece> pieceSorter = new Comparator<GamePiece>() {
+
+			public int compare(GamePiece o1, GamePiece o2) {
+				if (o1 == o2) {
+					return 0;
+				}
+				if (o1 == piece1) {
+					return -1;
+				}
+				return 1;
+			}
+		};
+		
+		final PieceSorterRetriever pieceSorterRetriever = new PieceSorterRetriever()
+		{
+
+			public Comparator<GamePiece> getPieceSorter() {
+				return pieceSorter;
+			}
+			
+		};
+		
+		final StackMetrics stackMetrics = new StackMetrics();
+	    final javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke('l');
+	    final Command groupResult = null;
+	    final Command piece1Result = new Command() {
+			
+			@Override
+			protected Command myUndoCommand() {
+				throw new Error("Method is not expected in test case");
+			}
+			
+			@Override
+			protected void executeCommand() {
+				throw new Error("Method is not expected in test case");
+			}
+		};
+	    final Command piece2Result = new Command() {
+			
+			@Override
+			protected Command myUndoCommand() {
+				throw new Error("Method is not expected in test case");
+			}
+			
+			@Override
+			protected void executeCommand() {
+				throw new Error("Method is not expected in test case");
+			}
+		};
+		context.checking(new Expectations() {{
+		    allowing (map).getStackMetrics();
+		    will(returnValue(stackMetrics));
+		    allowing(map).repaint();
+		    allowing(piece1).setProperty("Selected", true);
+		    allowing(piece2).setProperty("Selected", true);
+		    allowing(piece1).getMap();
+		    will(returnValue(map));
+		    allowing(piece2).getMap();
+		    will(returnValue(map));
+		    allowing(piece1).setProperty("snapshot", piece1);
+		    allowing(piece2).setProperty("snapshot", piece2);
+		    allowing(piece2).groupKeyEvent(
+		    		with(aNonNull(javax.swing.KeyStroke.class)), 
+		    		with(aNonNull(List.class)));
+		    will(returnValue(groupResult));
+		    one(piece1).keyEvent(stroke);
+		    will(returnValue(piece1Result));
+		    one(piece2).keyEvent(stroke);
+		    will(returnValue(piece2Result));
+		}});
+		
+		PieceClonerRetriever pieceClonerRetriever = new MockPieceClonerRetriever();
+		KeyBuffer sut = new KeyBuffer(boundsTracker, pieceClonerRetriever, pieceSorterRetriever);
+		sut.add(piece1);
+		sut.add(piece2);
+		
+		// Exercise
+		Command actual = sut.keyCommand(stroke);
+		
+		// Verify
+		Command[] expected = new Command[] { piece1Result, piece2Result};
+		asserEquals(expected, actual);
+	}	
+
+
 	@Test
 	public void testBoundsTrackerRepaintedAfterSelectedPiecesAdded()
 	{		
@@ -293,4 +439,182 @@ public class KeyBufferTest
 		// Verify
 		assertEquals(4, boundsChecker.piecesRepainted);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testKeyEventIsNotSentToOtherPiecesIfActionIsForGroup()
+	{		
+		// Setup
+		final Mockery context = new Mockery();
+		final GamePiece piece1 = context.mock(GamePiece.class, "piece1");
+		final GamePiece piece2 = context.mock(GamePiece.class, "piece2");
+		final IMap map = context.mock(IMap.class, "map");
+		final BoundsTracker boundsTracker = new BoundsTracker();
+		final Comparator<GamePiece> pieceSorter = new Comparator<GamePiece>() {
+
+			public int compare(GamePiece o1, GamePiece o2) {
+				if (o1 == o2) {
+					return 0;
+				}
+				if (o1 == piece1) {
+					return -1;
+				}
+				return 1;
+			}
+		};
+		
+		final PieceSorterRetriever pieceSorterRetriever = new PieceSorterRetriever()
+		{
+
+			public Comparator<GamePiece> getPieceSorter() {
+				return pieceSorter;
+			}
+			
+		};
+		
+		final StackMetrics stackMetrics = new StackMetrics();
+	    final javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke('l');
+	    final Command groupResult = new NullCommand();
+		context.checking(new Expectations() {{
+		    allowing (map).getStackMetrics();
+		    will(returnValue(stackMetrics));
+		    allowing(map).repaint();
+		    allowing(piece1).setProperty("Selected", true);
+		    allowing(piece2).setProperty("Selected", true);
+		    allowing(piece1).getMap();
+		    will(returnValue(map));
+		    allowing(piece2).getMap();
+		    will(returnValue(map));
+		    allowing(piece1).setProperty("snapshot", piece1);
+		    allowing(piece2).setProperty(aNonNull(String.class), aNonNull(Object.class));
+		    allowing(piece2).groupKeyEvent(
+		    		with(aNonNull(javax.swing.KeyStroke.class)), 
+		    		with(aNonNull(List.class)));
+		    will(returnValue(groupResult));
+		    never(piece1).keyEvent(with(aNonNull(javax.swing.KeyStroke.class)));
+		    never(piece1).keyEvent(with(aNonNull(javax.swing.KeyStroke.class)));
+		}});
+		
+		PieceClonerRetriever pieceClonerRetriever = new MockPieceClonerRetriever();
+		KeyBuffer sut = new KeyBuffer(boundsTracker, pieceClonerRetriever, pieceSorterRetriever);
+		sut.add(piece1);
+		sut.add(piece2);
+		
+		// Exercise
+		sut.keyCommand(stroke);
+		
+		// Verify
+		// If we got here then we never called keyEvent on the game pieces.
+		assertTrue(true);
+	}
+
+	@Test
+	public void tesKeyCommandDoesNotThrowExceptionIfNoPiecesAreSelected()
+	{		
+		// Setup
+		final Mockery context = new Mockery();
+		final IMap map = context.mock(IMap.class, "map");
+		final BoundsTracker boundsTracker = new BoundsTracker();
+		final Comparator<GamePiece> pieceSorter = new Comparator<GamePiece>() {
+
+			public int compare(GamePiece o1, GamePiece o2) {
+				throw new Error("Method should not be called in this test case");
+			}
+		};
+		
+		final PieceSorterRetriever pieceSorterRetriever = new PieceSorterRetriever()
+		{
+
+			public Comparator<GamePiece> getPieceSorter() {
+				return pieceSorter;
+			}
+			
+		};
+		
+		final StackMetrics stackMetrics = new StackMetrics();
+	    final javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke('l');
+		context.checking(new Expectations() {{
+		    allowing (map).getStackMetrics();
+		    will(returnValue(stackMetrics));
+		    allowing(map).repaint();
+		}});
+		
+		PieceClonerRetriever pieceClonerRetriever = new MockPieceClonerRetriever();
+		KeyBuffer sut = new KeyBuffer(boundsTracker, pieceClonerRetriever, pieceSorterRetriever);
+		
+		// Exercise
+		sut.keyCommand(stroke);
+		
+		// Verify
+		// If we got here then we never called keyEvent on the game pieces.
+		assertTrue(true);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testCommandResultFromGroupIsReturnedByKeyCommand()
+	{		
+		// Setup
+		final Mockery context = new Mockery();
+		final GamePiece piece1 = context.mock(GamePiece.class, "piece1");
+		final GamePiece piece2 = context.mock(GamePiece.class, "piece2");
+		final IMap map = context.mock(IMap.class, "map");
+		final BoundsTracker boundsTracker = new BoundsTracker();
+		final Comparator<GamePiece> pieceSorter = new Comparator<GamePiece>() {
+
+			public int compare(GamePiece o1, GamePiece o2) {
+				if (o1 == o2) {
+					return 0;
+				}
+				if (o1 == piece1) {
+					return -1;
+				}
+				return 1;
+			}
+		};
+		
+		final PieceSorterRetriever pieceSorterRetriever = new PieceSorterRetriever()
+		{
+
+			public Comparator<GamePiece> getPieceSorter() {
+				return pieceSorter;
+			}
+			
+		};
+		
+		final StackMetrics stackMetrics = new StackMetrics();
+	    final javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke('l');
+	    final Command groupResult = new NullCommand();
+		context.checking(new Expectations() {{
+		    allowing (map).getStackMetrics();
+		    will(returnValue(stackMetrics));
+		    allowing(map).repaint();
+		    allowing(piece1).setProperty("Selected", true);
+		    allowing(piece2).setProperty("Selected", true);
+		    allowing(piece1).getMap();
+		    will(returnValue(map));
+		    allowing(piece2).getMap();
+		    will(returnValue(map));
+		    allowing(piece1).setProperty("snapshot", piece1);
+		    allowing(piece2).setProperty(aNonNull(String.class), aNonNull(Object.class));
+		    allowing(piece2).groupKeyEvent(
+		    		with(aNonNull(javax.swing.KeyStroke.class)), 
+		    		with(aNonNull(List.class)));
+		    will(returnValue(groupResult));
+		    never(piece1).keyEvent(with(aNonNull(javax.swing.KeyStroke.class)));
+		    never(piece1).keyEvent(with(aNonNull(javax.swing.KeyStroke.class)));
+		}});
+		
+		PieceClonerRetriever pieceClonerRetriever = new MockPieceClonerRetriever();
+		KeyBuffer sut = new KeyBuffer(boundsTracker, pieceClonerRetriever, pieceSorterRetriever);
+		sut.add(piece1);
+		sut.add(piece2);
+		
+		// Exercise
+		Command actual = sut.keyCommand(stroke);
+		
+		// Verify
+		assertSame(groupResult, actual);
+	}
+
 }

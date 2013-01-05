@@ -306,6 +306,12 @@ public abstract class Decorator implements GamePiece, StateMergeable, PropertyNa
    */
   public abstract Command myKeyEvent(KeyStroke stroke);
 
+  
+  public Command groupKeyEvent(KeyStroke stroke, List<GamePiece> targets) 
+  {
+	  return this.piece.groupKeyEvent(stroke, targets);
+  }
+
   /**
    * Append the command returned by {@link #myKeyEvent} with the command returned
    * by the inner piece's {@link GamePiece#keyEvent} method.

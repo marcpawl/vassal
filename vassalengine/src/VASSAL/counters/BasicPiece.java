@@ -433,6 +433,11 @@ public class BasicPiece implements TranslatablePiece, StateMergeable, PropertyNa
     return Localization.getInstance().translate(key, getName());
   }
 
+  public Command groupKeyEvent(KeyStroke stroke, List<GamePiece> targets) {
+	// Key stroke is not for a defined group action.  
+	return null;
+  }
+
   public Command keyEvent(KeyStroke stroke) {
     getKeyCommands();
     if (!isEnabled(stroke)) {

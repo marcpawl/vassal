@@ -125,12 +125,56 @@ public class KeyBuffer {
     return pieces.isEmpty();
   }
 
+  /** 
+   * Perform the actions for the keystroke by having each game piece
+   * perform its own action.
+   * 
+   * @param stroke Keystroke to send to the game pieces.
+   * @param targets Game pieces that will receive the key stroke.
+   * @return Commands that result from performing the action on the
+   * game pieces.
+   */
+  private Command sendKeyStrokToEachGamePiece(
+		javax.swing.KeyStroke stroke,
+		ArrayList<GamePiece> targets) 
+  {
+	  Command comm = new NullCommand();
+	  for (GamePiece p : targets) {
+		  IPieceCloner pieceCloner = pieceClonerRetriever.getPieceCloner();
+		  p.setProperty(Properties.SNAPSHOT, pieceCloner.clonePiece(p)); // save state prior to command
+		  Command c2 = p.keyEvent(stroke);
+		  comm = comm.append(c2);
+	  }
+	  return comm;
+  }
+  
+  /** 
+   * Perform the actions for the keystroke.
+   * 
+   * @param stroke Keystroke to send to the game pieces.
+   * @param targets Game pieces that will receive the key stroke.
+   * @return Commands that result from performing the action on the
+   * game pieces.
+   */
+  private Command sendKeystrokeToKeyPieces(
+		  javax.swing.KeyStroke stroke,
+		  ArrayList<GamePiece> targets) 
+  {
+	  Command command = null;
+	  int nbTargets = targets.size();
+	  if (nbTargets > 0) {
+		  GamePiece strokeSource = targets.get(nbTargets - 1);
+		  command = strokeSource.groupKeyEvent(stroke, targets);
+	  }
+	  if (command == null) {
+		  command = sendKeyStrokToEachGamePiece(stroke, targets);
+	  }
+	  return command;
+  }
+
+
   public Command keyCommand(javax.swing.KeyStroke stroke) {
     sort(pieceSorterRetriever.getPieceSorter());
-    Command comm = new NullCommand();
-
-    bounds.clear();
-
     // Copy contents into new list, because contents may change
     // as a result of key commands
     ArrayList<GamePiece> targets = new ArrayList<GamePiece>(pieces);
@@ -144,17 +188,22 @@ public class KeyBuffer {
         }
       }
     }
+
+    bounds.clear();
     for (GamePiece p : targets) {
-      bounds.addPiece(p);
-      IPieceCloner pieceCloner = pieceClonerRetriever.getPieceCloner();
-	  p.setProperty(Properties.SNAPSHOT, pieceCloner.clonePiece(p)); // save state prior to command
-      Command c2 = p.keyEvent(stroke);
-      comm = comm.append(c2);
-      bounds.addPiece(p);
+        bounds.addPiece(p);
     }
+    
+    Command comm = sendKeystrokeToKeyPieces(stroke, targets);
+    
+    for (GamePiece p : targets) {
+        bounds.addPiece(p);
+    }
+    
     bounds.repaint();
     return comm;
   }
+
 
   public Iterator<GamePiece> getPiecesIterator() {
     return pieces.iterator();

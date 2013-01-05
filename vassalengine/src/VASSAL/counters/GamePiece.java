@@ -24,6 +24,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.util.List;
 
 import javax.swing.KeyStroke;
 
@@ -92,6 +93,21 @@ public interface GamePiece extends PropertySource {
    */
   public Command myExecute(KeyCommand keyCommand);
 
+  /**
+   * Perform the action for the keystroke if the action affects
+   * all the game pieces as a single action.
+   *   
+   * @param stroke User action that is to be acted on.
+   * @return a {@link Command} that, when executed, will invoke
+   * the same response.  Usually a {@link ChangePiece} command.  <code>null</code>
+   * indicates that the stroke does not correspond to a group action, and
+   * that the stroke should be sent to each piece separately.
+   *
+   * @see VASSAL.build.module.map.ForwardToKeyBuffer
+   */
+  public Command groupKeyEvent(KeyStroke stroke, List<GamePiece> targets);
+  
+  
   /**
    * Keyboard events are forward to this method when a piece is selected
    * The GamePiece can respond in any way it likes

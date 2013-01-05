@@ -28,6 +28,9 @@ import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.KeyStroke;
 
 import VASSAL.build.BadDataReport;
 import VASSAL.build.GameModule;
@@ -436,6 +439,17 @@ public class Stack implements GamePiece, StateMergeable {
       nv++;
     }
     return nv;
+  }
+
+  public Command groupKeyEvent(KeyStroke stroke, List<GamePiece> targets) 
+  {
+	    GamePiece p = topPiece();
+	    if (p != null) {
+	      return p.groupKeyEvent(stroke, targets);
+	    }
+	    else {
+	      return null;
+	    }
   }
 
   public Command keyEvent(javax.swing.KeyStroke stroke) {
