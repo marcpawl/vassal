@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -42,6 +43,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
 import VASSAL.build.GameModule;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.DrawPile;
@@ -120,7 +122,7 @@ public class ReturnToDeck extends Decorator implements TranslatablePiece {
         pile = findDeck();
       if (pile == null)
         return null;
-      final Map preMap = getMap();
+      final IMap preMap = getMap();
       final Point prePos = getPosition();
       setOldProperties();
       comm = pile.addToContents(Decorator.getOutermost(this));

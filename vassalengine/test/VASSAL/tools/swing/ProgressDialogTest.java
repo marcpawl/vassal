@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2010 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,20 +20,17 @@
 
 package VASSAL.tools.swing;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-
-import java.awt.Font;
-import java.util.Enumeration;
-import java.util.Iterator;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProgressDialogTest {
 

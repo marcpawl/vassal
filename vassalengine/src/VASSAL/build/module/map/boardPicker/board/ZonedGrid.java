@@ -35,7 +35,7 @@ import org.w3c.dom.Element;
 
 import VASSAL.build.AbstractConfigurable;
 import VASSAL.build.Buildable;
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.boardPicker.Board;
 import VASSAL.build.module.map.boardPicker.board.mapgrid.GridContainer;
@@ -105,7 +105,7 @@ public class ZonedGrid extends AbstractConfigurable implements GeometricGrid, Gr
     return container != null ? container.getBoard() : null;
   }
 
-  public Map getMap() {
+  public IMap getMap() {
     return getBoard() == null ? null : getBoard().getMap();
   }
 

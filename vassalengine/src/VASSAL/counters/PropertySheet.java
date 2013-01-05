@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney, Jim Urbas
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -73,6 +74,7 @@ import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 
 import VASSAL.build.GameModule;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.command.ChangePiece;
 import VASSAL.command.Command;
@@ -351,7 +353,7 @@ public class PropertySheet extends Decorator implements TranslatablePiece {
     if (launch.matches(stroke)) {
       if (frame == null) {
         m_fields = new ArrayList<JComponent>();
-        VASSAL.build.module.Map map = piece.getMap();
+        IMap map = piece.getMap();
         Frame parent = null;
         if (map != null && map.getView() != null) {
           Container topWin = map.getView().getTopLevelAncestor();

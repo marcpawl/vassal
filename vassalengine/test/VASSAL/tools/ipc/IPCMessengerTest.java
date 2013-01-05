@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2010 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,8 +20,12 @@
 
 package VASSAL.tools.ipc;
 
-import java.io.InputStream;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -29,14 +34,11 @@ import java.io.PipedOutputStream;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import org.junit.Test;
+
 import VASSAL.tools.ThrowableUtils;
 import VASSAL.tools.concurrent.SimpleFuture;
 import VASSAL.tools.concurrent.listener.EventListener;
-import VASSAL.tools.concurrent.listener.MultiEventListenerSupport;
-
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class IPCMessengerTest {
   @Test

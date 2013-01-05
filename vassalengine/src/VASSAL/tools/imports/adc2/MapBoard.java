@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2008 by Michael Kiefte
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -51,6 +52,7 @@ import javax.imageio.ImageIO;
 import VASSAL.build.AbstractConfigurable;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GlobalOptions;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Inventory;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.PrototypeDefinition;
@@ -133,7 +135,7 @@ public class MapBoard extends Importer {
         }
         l.setAttribute(LayeredPieceCollection.LAYER_ORDER, order);
 
-        Map mainMap = getMainMap();
+        IMap mainMap = getMainMap();
         Board board = getBoard();
         SetupStack stack = new SetupStack();
         insertComponent(stack, mainMap);

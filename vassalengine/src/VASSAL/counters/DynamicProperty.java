@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2006 by Rodney Kinney, Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -32,7 +33,7 @@ import javax.swing.Box;
 import javax.swing.KeyStroke;
 
 import VASSAL.build.GameModule;
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.properties.PropertyChanger;
 import VASSAL.build.module.properties.PropertyChangerConfigurer;
@@ -185,7 +186,7 @@ public class DynamicProperty extends Decorator implements TranslatablePiece, Pro
 
   public void setValue(String value) {
     Stack parent = getParent();
-    Map map = getMap();
+    IMap map = getMap();
 
     value = formatValue(value);
 

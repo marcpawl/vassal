@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2010 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,26 +20,26 @@
 
 package VASSAL.tools.image;
 
+import static VASSAL.tools.image.AssertImage.assertImageContentEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.InputStream;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
-import VASSAL.tools.io.TemporaryFileFactory;
-import VASSAL.tools.lang.Reference;
+import javax.imageio.ImageIO;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnit4Mockery;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
-import static VASSAL.tools.image.AssertImage.*;
+import VASSAL.tools.io.TemporaryFileFactory;
+import VASSAL.tools.lang.Reference;
 
 @RunWith(JMock.class)
 public class FallbackImageTypeConverterTest {

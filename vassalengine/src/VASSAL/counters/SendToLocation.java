@@ -3,6 +3,7 @@
  *
  * Copyright (c) 2003-2012 by Rodney Kinney, Brent Easton
  * GridLocation modifications copyright (c) 2010-2011 by Pieter Geerkens
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -41,6 +42,7 @@ import javax.swing.SwingUtilities;
 
 import VASSAL.build.GameModule;
 import VASSAL.build.module.Chatter;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.boardPicker.Board;
@@ -110,7 +112,7 @@ public class SendToLocation extends Decorator implements TranslatablePiece {
   protected FormattedString zone = new FormattedString("");
   protected FormattedString region = new FormattedString("");
   protected PropertyExpression propertyFilter = new PropertyExpression("");
-  private Map map;
+  private IMap map;
  // private Point dest;
 
   public SendToLocation() {

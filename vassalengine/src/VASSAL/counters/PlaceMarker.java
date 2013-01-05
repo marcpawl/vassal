@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -44,7 +45,7 @@ import VASSAL.build.GameModule;
 import VASSAL.build.GpIdSupport;
 import VASSAL.build.module.BasicCommandEncoder;
 import VASSAL.build.module.Chatter;
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.widget.CardSlot;
 import VASSAL.build.widget.PieceSlot;
@@ -146,7 +147,7 @@ public class PlaceMarker extends Decorator implements TranslatablePiece {
   }
 
   protected Command placeMarker() {
-    final Map m = getMap();
+    final IMap m = getMap();
     if (m == null) return null;
 
     final GamePiece marker = createMarker();

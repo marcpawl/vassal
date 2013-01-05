@@ -88,6 +88,7 @@ import VASSAL.counters.BasicPiece;
 import VASSAL.counters.BoundsTracker;
 import VASSAL.counters.Decorator;
 import VASSAL.counters.GamePiece;
+import VASSAL.counters.IBoundsTracker;
 import VASSAL.counters.PieceCloner;
 import VASSAL.counters.PieceFilter;
 import VASSAL.counters.PieceIterator;
@@ -885,7 +886,7 @@ public class Inventory extends AbstractConfigurable
   }
 
   public class HotKeySender implements KeyListener {
-    BoundsTracker tracker;
+    IBoundsTracker tracker;
 
     public void keyCommand(KeyStroke stroke) {
       if (forwardKeystroke) {

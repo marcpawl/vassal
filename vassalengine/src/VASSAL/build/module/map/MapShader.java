@@ -47,6 +47,7 @@ import VASSAL.build.AutoConfigurable;
 import VASSAL.build.Buildable;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GameComponent;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.boardPicker.Board;
@@ -543,7 +544,7 @@ public class MapShader extends AbstractConfigurable implements GameComponent, Dr
     return startsOn;
   }
 
-  protected Map getMap() {
+  protected IMap getMap() {
     return map;
   }
 

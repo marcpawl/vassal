@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2008-2009 by Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -30,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import VASSAL.build.GameModule;
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.properties.PropertySource;
 import VASSAL.counters.GamePiece;
 import VASSAL.counters.Stack;
@@ -365,7 +366,7 @@ public class ExpressionInterpreter extends AbstractInterpreter {
     int result = 0;
     if (ps instanceof GamePiece) {
       GamePiece p = (GamePiece) ps;
-      Map m = p.getMap();
+      IMap m = p.getMap();
       if (m != null) {
         String here = m.locationName(p.getPosition());
         GamePiece[] pieces = m.getPieces();

@@ -2,6 +2,8 @@
  * $Id$
  *
  * Copyright (c) 2004 by Rodney Kinney
+ * Copyright (c) 2012 by Marc Pawlowsky
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -107,15 +109,25 @@ public class Wheel extends Decorator implements TranslatablePiece {
   }
   
   public static final String ID = "wheel;";
-  public static final String DEGREES = "_Degrees";
+  
+  /** Description of the left wheel command in the menus. */
   protected String leftCommand;
+  /** Description of the right wheel command in the menus. */
   protected String rightCommand;
+  /** Key stroke for the left wheel command. */
   protected NamedKeyStroke leftKey;
+  /** Key stroke for the right wheel command. */
   protected NamedKeyStroke rightKey;
+  /** Name of the command that rotates the game pieces left. */
   protected String leftRotateCommand;
+  /** Name of the command that rotates the game pieces right. */
   protected String rightRotateCommand;
+
+  /** Command for wheeling left. */
   WheelKeyCommand leftWheelKeyCommand;
+  /** Command for wheeling right. */
   WheelKeyCommand rightWheelKeyCommand;
+  /** All the commands implemented by this decorator. */
   protected KeyCommand[] commands;
 
   public Wheel() {
@@ -250,6 +262,13 @@ public class Wheel extends Decorator implements TranslatablePiece {
     return result;
   }
 
+  /**
+   * Retrieve the offset from the game piece center point, of
+   * the corner that is being rotated.
+   *
+   * @param rotateCommand Command indicating which wheel to do.
+   * @return Location of the corner of the game piece.
+   */
   private Point2D getPivotPoint(WheelKeyCommand rotateCommand)
   {
 	  int index = rotateCommand.getPivotPointIndex();

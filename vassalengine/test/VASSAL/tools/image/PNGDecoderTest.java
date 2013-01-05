@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2010 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,15 +20,17 @@
 
 package VASSAL.tools.image;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PNGDecoderTest {
   @Test

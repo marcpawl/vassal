@@ -48,6 +48,7 @@ import VASSAL.build.Buildable;
 import VASSAL.build.Builder;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GameComponent;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.boardPicker.board.HexGrid;
@@ -90,7 +91,7 @@ public class Board extends AbstractConfigurable implements GridContainer {
   protected boolean fixedBoundaries = false;
   protected Color color = null;
   protected MapGrid grid = null;
-  protected Map map;
+  protected IMap map;
   protected double magnification = 1.0;
 
   @Deprecated protected String boardName = "Board 1";
@@ -106,11 +107,11 @@ public class Board extends AbstractConfigurable implements GridContainer {
    * @return this <code>Board</code>'s {@link Map}.
    * Until a game is started that is using this board, the map will be null.
    */
-  public Map getMap() {
+  public IMap getMap() {
     return map;
   }
 
-  public void setMap(Map map) {
+  public void setMap(IMap map) {
     this.map = map;
   }
 

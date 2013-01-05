@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2005 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,7 +21,7 @@ package VASSAL.counters;
 
 import java.awt.Point;
 
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.map.boardPicker.Board;
 import VASSAL.build.module.map.boardPicker.board.MapGrid;
 
@@ -28,12 +29,12 @@ import VASSAL.build.module.map.boardPicker.board.MapGrid;
  * Accepts all pieces within a specified range of a given point on a map
  */
 public class RangeFilter implements PieceFilter {
-  private Map map;
+  private IMap map;
   private Point position;
   private MapGrid grid;
   private int range;
 
-  public RangeFilter(Map map, Point location, int range) {
+  public RangeFilter(IMap map, Point location, int range) {
     this.position = location;
     this.map = map;
     this.range = range;

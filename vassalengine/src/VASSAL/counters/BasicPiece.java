@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -41,6 +42,7 @@ import javax.swing.KeyStroke;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.Chatter;
 import VASSAL.build.module.GlobalOptions;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.boardPicker.Board;
@@ -92,7 +94,7 @@ public class BasicPiece implements TranslatablePiece, StateMergeable, PropertyNa
   protected JPopupMenu popup;
   protected Rectangle imageBounds;
   protected ScaledImagePainter imagePainter = new ScaledImagePainter();
-  private Map map;
+  private IMap map;
   private KeyCommand[] commands;
   private Stack parent;
   private Point pos = new Point(0, 0);
@@ -140,14 +142,14 @@ public class BasicPiece implements TranslatablePiece, StateMergeable, PropertyNa
                   .append(commonName).getValue();
   }
 
-  public void setMap(Map map) {
+  public void setMap(IMap map) {
     if (map != this.map) {
       commands = null;
       this.map = map;
     }
   }
 
-  public Map getMap() {
+  public IMap getMap() {
     return getParent() == null ? map : getParent().getMap();
   }
 
@@ -218,7 +220,7 @@ public class BasicPiece implements TranslatablePiece, StateMergeable, PropertyNa
     }
     Object prop = props == null ? null : props.get(key);
     if (prop == null) {
-      final Map map = getMap();
+      final IMap map = getMap();
       final Zone zone = (map == null ? null : map.findZone(getPosition()));
       if (zone != null) {
         prop = zone.getProperty(key);
@@ -304,7 +306,7 @@ public class BasicPiece implements TranslatablePiece, StateMergeable, PropertyNa
     }
     Object prop = props == null ? null : props.get(key);
     if (prop == null) {
-      final Map map = getMap();
+      final IMap map = getMap();
       final Zone zone = (map == null ? null : map.findZone(getPosition()));
       if (zone != null) {
         prop = zone.getLocalizedProperty(key);
@@ -558,7 +560,7 @@ public class BasicPiece implements TranslatablePiece, StateMergeable, PropertyNa
 
   public void setState(String s) {
     final GamePiece outer = Decorator.getOutermost(this);
-    final Map oldMap = getMap();
+    final IMap oldMap = getMap();
     final SequenceEncoder.Decoder st = new SequenceEncoder.Decoder(s, ';');
     final String mapId = st.nextToken();
     Map newMap = null;

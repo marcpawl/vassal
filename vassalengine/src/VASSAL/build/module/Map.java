@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2012 by Rodney Kinney, Joel Uckelman, Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -11,9 +12,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Library General Public License for more details.
- *
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, copies are available
+ *
  * at http://www.opensource.org.
  */
 package VASSAL.build.module;
@@ -38,7 +39,6 @@ import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.HierarchyEvent;
@@ -47,7 +47,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -81,7 +80,6 @@ import org.w3c.dom.Element;
 import VASSAL.build.AbstractConfigurable;
 import VASSAL.build.AutoConfigurable;
 import VASSAL.build.Buildable;
-import VASSAL.build.Configurable;
 import VASSAL.build.GameModule;
 import VASSAL.build.IllegalBuildException;
 import VASSAL.build.module.documentation.HelpFile;
@@ -123,7 +121,6 @@ import VASSAL.build.module.properties.ChangePropertyCommandEncoder;
 import VASSAL.build.module.properties.GlobalProperties;
 import VASSAL.build.module.properties.MutablePropertiesContainer;
 import VASSAL.build.module.properties.MutableProperty;
-import VASSAL.build.module.properties.PropertySource;
 import VASSAL.build.widget.MapWidget;
 import VASSAL.command.AddPiece;
 import VASSAL.command.Command;
@@ -161,7 +158,6 @@ import VASSAL.tools.ComponentSplitter;
 import VASSAL.tools.KeyStrokeSource;
 import VASSAL.tools.LaunchButton;
 import VASSAL.tools.NamedKeyStroke;
-import VASSAL.tools.ToolBarComponent;
 import VASSAL.tools.UniqueIdManager;
 import VASSAL.tools.WrapLayout;
 import VASSAL.tools.menu.MenuManager;
@@ -179,8 +175,8 @@ import org.jdesktop.swinghelper.layer.demo.DebugPainter;
  * A Map may contain many different {@link Buildable} subcomponents. Components which are added directly to a Map are
  * contained in the <code>VASSAL.build.module.map</code> package
  */
-public class Map extends AbstractConfigurable implements GameComponent, MouseListener, MouseMotionListener, DropTargetListener, Configurable,
-    UniqueIdManager.Identifyable, ToolBarComponent, MutablePropertiesContainer, PropertySource, PlayerRoster.SideChangeListener {
+public class Map extends AbstractConfigurable implements  IMap 
+{
   protected static boolean changeReportingEnabled = true;
   protected String mapID = ""; //$NON-NLS-1$
   protected String mapName = ""; //$NON-NLS-1$
@@ -867,7 +863,8 @@ mainWindowDock = splitter.splitBottom(splitter.getSplitAncestor(GameModule.getGa
    * including the edge buffer
    */
 // FIXME: why synchronized?
-  public synchronized Dimension mapSize() {
+  public synchronized Dimension mapSize() 
+  {
     final Rectangle r = new Rectangle(0,0);
     for (Board b : boards) r.add(b.bounds());
     r.width += edgeBuffer.width;
@@ -1606,7 +1603,7 @@ mainWindowDock = splitter.splitBottom(splitter.getSplitAncestor(GameModule.getGa
    *
    * @see GamePiece#boundingBox
    */
-  public Rectangle boundingBoxOf(GamePiece p) {
+   public Rectangle boundingBoxOf(GamePiece p) {
     Rectangle r = null;
     if (p.getMap() == this) {
       r = p.boundingBox();
@@ -2444,7 +2441,7 @@ mainWindowDock = splitter.splitBottom(splitter.getSplitAncestor(GameModule.getGa
   }
 
   /**
-   * Make a best gues for a unique identifier for the target. Use
+   * Make a best guess for a unique identifier for the target. Use
    * {@link VASSAL.tools.UniqueIdManager.Identifyable#getConfigureName} if non-null, otherwise use
    * {@link VASSAL.tools.UniqueIdManager.Identifyable#getId}
    *
@@ -2527,10 +2524,10 @@ mainWindowDock = splitter.splitBottom(splitter.getSplitAncestor(GameModule.getGa
    */
   public static class Merger implements DeckVisitor {
     private Point pt;
-    private Map map;
+    private IMap map;
     private GamePiece p;
 
-    public Merger(Map map, Point pt, GamePiece p) {
+    public Merger(IMap map, Point pt, GamePiece p) {
       this.map = map;
       this.pt = pt;
       this.p = p;

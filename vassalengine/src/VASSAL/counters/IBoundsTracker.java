@@ -1,7 +1,6 @@
 /*
  * $Id$
  *
- * Copyright (c) 2000-2003 by Rodney Kinney
  * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
@@ -19,46 +18,25 @@
  */
 package VASSAL.counters;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import VASSAL.build.module.IMap;
-
 /**
  * Records the bounding boxes of GamePieces.  Use addPiece() to
  * record the bounding box of a GamePiece at a certain time.  Use
  * repaint() to repaint the appropriate areas of the maps to which the
  * added pieces belonged.
  */
-public class BoundsTracker implements IBoundsTracker {
-	private Set<IMap> maps;
+public interface IBoundsTracker {
 
-	public BoundsTracker() {
-		maps = new HashSet<IMap>();
-	}
+	/** Remove all the game pieces that have been previously added. */
+	public abstract void clear();
 
-	/* (non-Javadoc)
-	 * @see VASSAL.counters.IBoundsTracker#clear()
+	/** 
+	 * Indicate that a game piece has been modified.
+	 * 
+	 * @param p Game piece that has been modified.
 	 */
-	public void clear() {
-		maps.clear();
-	}
+	public abstract void addPiece(GamePiece p);
 
-	/* (non-Javadoc)
-	 * @see VASSAL.counters.IBoundsTracker#addPiece(VASSAL.counters.GamePiece)
-	 */
-	public void addPiece(GamePiece p) {
-		if (p.getMap() != null) {
-			maps.add(p.getMap());
-		}
-	}
+	/** Repaint the areas that have been modified. */
+	public abstract void repaint();
 
-	/* (non-Javadoc)
-	 * @see VASSAL.counters.IBoundsTracker#repaint()
-	 */
-	public void repaint() {
-		for (IMap m : maps) {
-			m.repaint();
-		}
-	}
 }

@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -32,12 +33,42 @@ import VASSAL.command.NullCommand;
 public class KeyBuffer {
   private static KeyBuffer theBuffer;
   private List<GamePiece> pieces;
-  private BoundsTracker bounds;
-  private Comparator<GamePiece> pieceSorter = new PieceSorter();
+  private final IBoundsTracker bounds;
+  private final PieceClonerRetriever pieceClonerRetriever;
+  private final PieceSorterRetriever pieceSorterRetriever;
 
-  private KeyBuffer() {
+  /** 
+   * The KeyBuffer is a singleton, this method should only be called
+   * within the class KeyBuffer, or by testing.
+   */
+  KeyBuffer() {
     pieces = new ArrayList<GamePiece>();
     bounds = new BoundsTracker();
+    pieceClonerRetriever = new PieceClonerRetrieverSingleton();
+    pieceSorterRetriever = new PieceSorterRetriever() {
+		
+		public Comparator<GamePiece> getPieceSorter() {
+			return new PieceSorter();
+		}
+	};
+  }
+
+  /** 
+   * The KeyBuffer is a singleton, this method should only be called
+   * by testing.
+   * @param boundsTracker Tool that tracks pieces that have been modified.
+   * @param pieceClonerRetriever Tool to retrieve the tool to clone pieces.
+   * @param pieceSorterRetriever Tool to retrieve the tool to sort pieces.
+   */
+  KeyBuffer(
+		  IBoundsTracker boundsTracker, 
+		  PieceClonerRetriever pieceClonerRetriever,
+		  PieceSorterRetriever pieceSorterRetriever) 
+  {
+    this.pieces = new ArrayList<GamePiece>();
+    this.bounds = boundsTracker;
+    this.pieceClonerRetriever = pieceClonerRetriever;
+    this.pieceSorterRetriever = pieceSorterRetriever;
   }
 
   public static void init(KeyBuffer kb) {
@@ -95,7 +126,7 @@ public class KeyBuffer {
   }
 
   public Command keyCommand(javax.swing.KeyStroke stroke) {
-    sort(pieceSorter);
+    sort(pieceSorterRetriever.getPieceSorter());
     Command comm = new NullCommand();
 
     bounds.clear();
@@ -115,7 +146,8 @@ public class KeyBuffer {
     }
     for (GamePiece p : targets) {
       bounds.addPiece(p);
-      p.setProperty(Properties.SNAPSHOT, PieceCloner.getInstance().clonePiece(p)); // save state prior to command
+      IPieceCloner pieceCloner = pieceClonerRetriever.getPieceCloner();
+	  p.setProperty(Properties.SNAPSHOT, pieceCloner.clonePiece(p)); // save state prior to command
       Command c2 = p.keyEvent(stroke);
       comm = comm.append(c2);
       bounds.addPiece(p);

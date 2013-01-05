@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -128,10 +129,11 @@ public class KeyCommand extends AbstractAction {
   public void actionPerformed(ActionEvent evt) {
     if (stroke != null) {
       if (global) {
-        GameModule.getGameModule().sendAndLog(KeyBuffer.getBuffer().keyCommand(stroke));
+        Command keyCommand = KeyBuffer.getBuffer().keyCommand(stroke);
+		GameModule.getGameModule().sendAndLog(keyCommand);
       }
       else {
-        BoundsTracker t = new BoundsTracker();
+        IBoundsTracker t = new BoundsTracker();
         GamePiece outer = Decorator.getOutermost(target);
         t.addPiece(outer);
         outer.setProperty(Properties.SNAPSHOT, PieceCloner.getInstance().clonePiece(outer)); // save state prior to command

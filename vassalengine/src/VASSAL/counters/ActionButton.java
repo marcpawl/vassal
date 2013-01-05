@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2006 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -33,7 +34,7 @@ import javax.swing.Box;
 import javax.swing.KeyStroke;
 
 import VASSAL.build.GameModule;
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.command.Command;
 import VASSAL.configure.IntConfigurer;
@@ -194,11 +195,11 @@ public class ActionButton extends Decorator implements EditablePiece, Loopable {
    * click falls within the button's boundaries
    */
   protected static class ButtonPusher {
-    private Set<Map> maps = new HashSet<Map>();
+    private Set<IMap> maps = new HashSet<IMap>();
     private java.util.Map<Component,ComponentMouseListener>
       componentMouseListeners = new HashMap<Component,ComponentMouseListener>();
 
-    public void register(Map map) {
+    public void register(IMap map) {
       if (map != null) {
         if (!maps.contains(map)) {
           map.addLocalMouseListener(new MapMouseListener(map));
@@ -274,9 +275,9 @@ public class ActionButton extends Decorator implements EditablePiece, Loopable {
     }
 
     protected class MapMouseListener extends MouseAdapter {
-      private Map map;
+      private IMap map;
 
-      public MapMouseListener(Map map) {
+      public MapMouseListener(IMap map) {
         this.map = map;
       }
 

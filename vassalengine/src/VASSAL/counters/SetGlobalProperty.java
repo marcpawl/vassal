@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2012 by Brent Easton, Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -32,6 +33,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import VASSAL.build.GameModule;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.boardPicker.board.mapgrid.Zone;
@@ -193,7 +195,7 @@ public class SetGlobalProperty extends DynamicProperty {
         ArrayList<MutablePropertiesContainer> propertyContainers =
           new ArrayList<MutablePropertiesContainer>();
         propertyContainers.add(0, GameModule.getGameModule());
-        Map map = getMap();
+        IMap map = getMap();
         if (NAMED_MAP.equals(propertyLevel)) {
           String mapName = (new FormattedString(searchName)).getText(Decorator.getOutermost(this));
           map = Map.getMapById(mapName);

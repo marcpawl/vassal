@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -43,6 +44,7 @@ import javax.swing.SwingUtilities;
 
 import VASSAL.build.GameModule;
 import VASSAL.build.module.Chatter;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.properties.PropertySource;
@@ -72,7 +74,7 @@ public class ReportState extends Decorator implements TranslatablePiece {
   protected String[] cycleReportFormat;
   protected NamedKeyStroke[] cycleDownKeys;
   protected int cycleIndex = -1;
-  protected Map oldMap;
+  protected IMap oldMap;
   protected String description;
 
   public ReportState() {

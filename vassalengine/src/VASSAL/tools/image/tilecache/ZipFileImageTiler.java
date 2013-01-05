@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2010, 2011 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -26,8 +27,8 @@ import static VASSAL.tools.image.tilecache.ZipFileImageTilerState.TILING_FINISHE
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -40,7 +41,6 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import VASSAL.tools.ArrayUtils;
 import VASSAL.tools.concurrent.DaemonThreadFactory;
 import VASSAL.tools.image.FallbackImageTypeConverter;
 import VASSAL.tools.image.ImageIOImageLoader;

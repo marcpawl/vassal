@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2004-2012 by Rodney Kinney, Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -55,6 +56,7 @@ import javax.swing.SwingUtilities;
 import VASSAL.build.BadDataReport;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.Chatter;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.PlayerRoster;
 import VASSAL.build.module.map.DeckGlobalKeyCommand;
@@ -320,7 +322,7 @@ public class Deck extends Stack implements PlayerRoster.SideChangeListener {
     fireNumCardsProperty();
   }
 
-  public void setMap(Map map) {
+  public void setMap(IMap map) {
     if (map != getMap()) {
       countProperty.removeFromContainer();
       if (map != null) countProperty.addTo(map);

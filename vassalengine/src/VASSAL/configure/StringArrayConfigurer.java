@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2011 by Rodney Kinney, Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,7 +29,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,7 +40,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
-
 import VASSAL.i18n.Resources;
 import VASSAL.tools.ArrayUtils;
 import VASSAL.tools.ScrollPane;

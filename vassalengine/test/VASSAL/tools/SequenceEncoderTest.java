@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2009 by Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,17 +19,18 @@
  */
 package VASSAL.tools;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
-import javax.swing.KeyStroke;
 
-import VASSAL.configure.PropertyExpression;
+import javax.swing.KeyStroke;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import VASSAL.configure.PropertyExpression;
 
 public class SequenceEncoderTest {
 

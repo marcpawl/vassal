@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2004 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -41,6 +42,7 @@ import javax.swing.SwingUtilities;
 
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GlobalOptions;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.MovementReporter;
@@ -456,7 +458,7 @@ public class Translate extends Decorator implements TranslatablePiece {
       GameModule.getGameModule().sendAndLog(comm);
     }
 
-    public void add(Map map, GamePiece piece, Point pos) {
+    public void add(IMap map, GamePiece piece, Point pos) {
       moves.add(new Move(map, piece, pos));
       pieces.add(piece);
     }
@@ -487,11 +489,11 @@ public class Translate extends Decorator implements TranslatablePiece {
     }
 
     private static class Move {
-      private Map map;
+      private IMap map;
       private GamePiece piece;
       private Point pos;
 
-      public Move(Map map, GamePiece piece, Point pos) {
+      public Move(IMap map, GamePiece piece, Point pos) {
         this.map = map;
         this.piece = piece;
         this.pos = pos;

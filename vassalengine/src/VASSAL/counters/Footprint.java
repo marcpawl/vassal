@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2012 by Rodney Kinney, Brent Easton, Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -45,6 +46,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.command.ChangeTracker;
@@ -241,7 +243,7 @@ public class Footprint extends MovementMarkable {
   public void setMoved(boolean justMoved) {
     if (justMoved) {
       recordCurrentPosition();
-      final Map map = getMap();
+      final IMap map = getMap();
       startMapId = map != null ? map.getId() : null;
     }
     else {
@@ -294,7 +296,7 @@ public class Footprint extends MovementMarkable {
   }
 
   public void redraw() {
-    final Map m = getMap();
+    final IMap m = getMap();
     if (m != null) {
       m.repaint(getMyBoundingBox());
     }

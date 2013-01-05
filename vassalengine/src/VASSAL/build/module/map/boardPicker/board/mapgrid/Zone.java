@@ -55,7 +55,7 @@ import VASSAL.build.AutoConfigurable;
 import VASSAL.build.Buildable;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GameComponent;
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.map.boardPicker.Board;
 import VASSAL.build.module.map.boardPicker.board.HexGrid;
 import VASSAL.build.module.map.boardPicker.board.MapGrid;
@@ -397,7 +397,7 @@ public class Zone extends AbstractConfigurable implements GridContainer, Mutable
     return parentGrid == null ? null : parentGrid.getBoard();
   }
 
-  public Map getMap() {
+  public IMap getMap() {
     return parentGrid == null ? null : parentGrid.getBoard().getMap();
   }
 

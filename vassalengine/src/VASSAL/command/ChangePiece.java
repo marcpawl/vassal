@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +23,7 @@ import VASSAL.build.GameModule;
 import VASSAL.build.module.GlobalOptions;
 import VASSAL.counters.BoundsTracker;
 import VASSAL.counters.GamePiece;
+import VASSAL.counters.IBoundsTracker;
 import VASSAL.counters.Properties;
 import VASSAL.counters.StateMergeable;
 
@@ -60,7 +62,7 @@ public class ChangePiece extends Command {
   protected void executeCommand() {
     GamePiece target = GameModule.getGameModule().getGameState().getPieceForId(id);
     if (target != null) {
-      BoundsTracker bounds = new BoundsTracker();
+      IBoundsTracker bounds = new BoundsTracker();
       bounds.addPiece(target);
       if (oldState != null) {
         if (target instanceof StateMergeable) {

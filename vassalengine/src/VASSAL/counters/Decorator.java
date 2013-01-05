@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2012 by Rodney Kinney, Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -29,7 +30,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import VASSAL.build.BadDataReport;
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.map.boardPicker.Board;
 import VASSAL.build.module.map.boardPicker.board.mapgrid.Zone;
 import VASSAL.build.module.properties.PropertyNameSource;
@@ -112,7 +113,7 @@ public abstract class Decorator implements GamePiece, StateMergeable, PropertyNa
     }
   }
 
-  public void setMap(Map m) {
+  public void setMap(IMap m) {
     piece.setMap(m);
   }
 
@@ -123,7 +124,7 @@ public abstract class Decorator implements GamePiece, StateMergeable, PropertyNa
     return piece;
   }
 
-  public Map getMap() {
+  public IMap getMap() {
     return piece.getMap();
   }
 
@@ -449,7 +450,7 @@ public abstract class Decorator implements GamePiece, StateMergeable, PropertyNa
     String boardName = ""; //$NON-NLS-1$
     String zoneName = ""; //$NON-NLS-1$
     String locationName = ""; //$NON-NLS-1$
-    final Map m = p.getMap();
+    final IMap m = p.getMap();
     final Point pos = p.getPosition();
 
     if (m != null) {

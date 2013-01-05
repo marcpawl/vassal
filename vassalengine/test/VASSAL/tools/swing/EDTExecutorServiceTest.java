@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2009 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,20 +19,22 @@
  */
 package VASSAL.tools.swing;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
-import javax.swing.SwingUtilities;
 
-import VASSAL.tools.concurrent.SimpleFuture;
+import javax.swing.SwingUtilities;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import VASSAL.tools.concurrent.SimpleFuture;
 
 public class EDTExecutorServiceTest {
   @Test

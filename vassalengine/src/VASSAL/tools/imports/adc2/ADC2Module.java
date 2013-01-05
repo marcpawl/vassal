@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2008 by Michael Kiefte
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -65,6 +66,7 @@ import VASSAL.build.Widget;
 import VASSAL.build.module.ChartWindow;
 import VASSAL.build.module.DiceButton;
 import VASSAL.build.module.GlobalOptions;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.MultiActionButton;
 import VASSAL.build.module.PieceWindow;
@@ -2316,7 +2318,7 @@ private void configureFlipDefinitions(GameModule gameModule) {
 }
 
 private void configureMainMap(GameModule gameModule) throws IOException {
-  final Map mainMap = getMainMap();
+  final IMap mainMap = getMainMap();
   mainMap.setAttribute(Map.MARK_UNMOVED_ICON, StateFlag.MOVE.getStatusIconName());
 //  if (usePieceNames) {
 //    mainMap.setAttribute(Map.MOVE_WITHIN_FORMAT, "$" + Map.PIECE_NAME + "$" + "/" + PC_NAME + " moves $" + Map.OLD_LOCATION + "$ -> $" + Map.LOCATION + "$ *");

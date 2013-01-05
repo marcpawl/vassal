@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2007 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,18 +20,16 @@
 
 package VASSAL.tools.lang;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assume.assumeTrue;
+
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.apache.commons.lang.SystemUtils;
-
-import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-import static org.junit.Assume.*;
 
 public class MemoryUtilsTest {
   @Test

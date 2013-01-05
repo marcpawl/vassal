@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2007 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -29,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import VASSAL.Info;
-import VASSAL.tools.imageop.Op;
 
 /**
  * Handles temporary files. <code>TempFileManager</code> cleans up

@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2010 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,17 +20,17 @@
 
 package VASSAL.tools.image;
 
+import static VASSAL.tools.image.AssertImage.assertImageContentEquals;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
-import VASSAL.tools.lang.Reference;
+import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static VASSAL.tools.image.AssertImage.*;
+import VASSAL.tools.lang.Reference;
 
 public class MemoryImageTypeConverterTest {
 

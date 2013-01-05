@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2005 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -135,7 +136,7 @@ public class GlobalCommand {
 
   protected class Visitor implements DeckVisitor {
     private Command command;
-    private BoundsTracker tracker;
+    private IBoundsTracker tracker;
     private PieceFilter filter;
     private KeyStroke stroke;
 
@@ -182,7 +183,7 @@ public class GlobalCommand {
       return command;
     }
 
-    public BoundsTracker getTracker() {
+    public IBoundsTracker getTracker() {
       return tracker;
     }
 

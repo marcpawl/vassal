@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2009 by Rodney Kinney, Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -32,7 +33,6 @@ import java.beans.PropertyChangeListener;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -47,6 +47,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.tree.TreePath;
 
+import net.miginfocom.swing.MigLayout;
 import VASSAL.build.AbstractBuildable;
 import VASSAL.build.Buildable;
 import VASSAL.build.GameModule;
@@ -62,8 +63,6 @@ import VASSAL.tools.ComponentSplitter;
 import VASSAL.tools.NamedKeyStroke;
 import VASSAL.tools.NamedKeyStrokeListener;
 import VASSAL.tools.menu.MenuManager;
-
-import net.miginfocom.swing.MigLayout;
 
 public class ChatServerControls extends AbstractBuildable {
 

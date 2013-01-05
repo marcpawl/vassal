@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2010 by Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,23 +20,22 @@
 
 package VASSAL.tools.image;
 
+import static VASSAL.tools.image.AssertImage.assertImageContentEquals;
+import static org.junit.Assert.assertEquals;
+
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
-import VASSAL.tools.io.IOUtils;
-
 import org.apache.commons.lang.SystemUtils;
-
-import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static VASSAL.tools.image.AssertImage.*;
+import VASSAL.tools.io.IOUtils;
 
 public class ImageIOImageLoaderTest {
   protected static final String jpg = "test/VASSAL/tools/image/rainbow.jpg";

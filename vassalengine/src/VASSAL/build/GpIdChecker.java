@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2011 by Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import VASSAL.build.widget.PieceSlot;
-import VASSAL.command.AddPiece;
 import VASSAL.counters.BasicPiece;
 import VASSAL.counters.Decorator;
 import VASSAL.counters.GamePiece;

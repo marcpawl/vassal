@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2008 by Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -36,9 +37,9 @@ import VASSAL.script.BeanShell;
  */
 public class Map {
 
-  private VASSAL.build.module.Map vassalMap;
+  private VASSAL.build.module.IMap vassalMap;
 
-  public Map(VASSAL.build.module.Map m) {
+  public Map(VASSAL.build.module.IMap m) {
     vassalMap = m;
   }
 

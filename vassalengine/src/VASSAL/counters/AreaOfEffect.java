@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2005 by Scott Giese, Rodney Kinney, Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -47,6 +48,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.MapShader;
@@ -209,7 +211,7 @@ public class AreaOfEffect extends Decorator implements TranslatablePiece, MapSha
 
   protected Area getArea() {
     Area a;
-    final Map map = getMap();
+    final IMap map = getMap();
     // Always draw the area centered on the piece's current position
     // (For instance, don't draw it at an offset if it's in an expanded stack)
     final Point mapPosition = getPosition();

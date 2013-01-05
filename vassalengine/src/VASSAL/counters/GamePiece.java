@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,6 +29,7 @@ import javax.swing.KeyStroke;
 
 import VASSAL.build.module.BasicCommandEncoder;
 import VASSAL.build.module.GameState;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.properties.PropertySource;
 import VASSAL.command.ChangePiece;
@@ -39,9 +41,9 @@ import VASSAL.command.Command;
 public interface GamePiece extends PropertySource {
 
   /** Each GamePiece belongs to a single {@link Map} */
-  public void setMap(Map map);
+  public void setMap(IMap map);
 
-  public Map getMap();
+  public IMap getMap();
 
   /**
    * Draw this GamePiece
@@ -87,9 +89,6 @@ public interface GamePiece extends PropertySource {
    * @param keyCommand Command to execute.
    * @return null if there is no decorator that will perform the command,
    * otherwise the result of executing the command.
-   * <p>
-   * Classes that derive from {@link Decorator} should override this
-   * method.
    */
   public Command myExecute(KeyCommand keyCommand);
 

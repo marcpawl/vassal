@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2004-2008 by Rodney Kinney, Joel Uckelman
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,33 +21,52 @@
 package VASSAL.counters;
 
 import VASSAL.build.GameModule;
-import VASSAL.build.module.Map;
+import VASSAL.build.GameModuleRetriever;
+import VASSAL.build.GameModuleRetrieverSingleton;
+import VASSAL.build.module.IMap;
 import VASSAL.command.AddPiece;
 import VASSAL.tools.ReflectionUtils;
 
 /**
  * Utility class for cloning {@link GamePiece}s
  */
-public class PieceCloner {
-  private static PieceCloner instance = new PieceCloner();
+public class PieceCloner implements IPieceCloner {
+  
+  private final GameModuleRetriever gameModuleRetriever;
+  
+  private static IPieceCloner instance = new PieceCloner();
 
-  // For use by subclasses
-  protected PieceCloner() {}
-
-  public static PieceCloner getInstance() {
+  /**
+   * Introduces the use of {@link GameModuleRetrieverSingleton}
+   * as the {@link GameModuleRetriever}.
+   *  For use by subclasses
+   */
+  protected PieceCloner() 
+  {
+	  gameModuleRetriever = new GameModuleRetrieverSingleton();
+  }
+  
+  /**
+   * @param gameModuleRetriever Tool to use for retrieving the game module.
+   */
+  PieceCloner(GameModuleRetriever gameModuleRetriever)
+  {
+	this.gameModuleRetriever = gameModuleRetriever;  
+  }
+  
+  public static IPieceCloner getInstance() {
     return instance;
   }
 
-  /**
-   * Create a new instance that is a clone of the given piece.
-   *
-   * @return the new instance
-   */
+  /* (non-Javadoc)
+ * @see VASSAL.counters.IPieceCloner#clonePiece(VASSAL.counters.GamePiece)
+ */
   public GamePiece clonePiece(GamePiece piece) {
     GamePiece clone = null;
-    if (piece instanceof BasicPiece) {
-      clone = GameModule.getGameModule().createPiece(piece.getType());
-      final Map m = piece.getMap();
+	if (piece instanceof BasicPiece) {
+	  GameModule gameModule = gameModuleRetriever.getGameModule();
+      clone = gameModule.createPiece(piece.getType());
+      final IMap m = piece.getMap();
 
       // Temporarily set map to null so that clone won't be added to map
       piece.setMap(null);
@@ -69,9 +89,12 @@ public class PieceCloner {
       }
     }
     else {
-      clone = ((AddPiece) GameModule.getGameModule().decode(
-        GameModule.getGameModule().encode(new AddPiece(piece)))).getTarget();
-      final Map m = piece.getMap();
+    	AddPiece newPiece = new AddPiece(piece);
+    	GameModule gameModule = gameModuleRetriever.getGameModule();
+    	String encodedNewPiece = gameModule.encode(newPiece);
+    	clone = ((AddPiece) gameModule.decode(
+    			encodedNewPiece)).getTarget();
+    	final IMap m = piece.getMap();
 
       // Temporarily set map to null so that clone won't be added to map
       piece.setMap(null);

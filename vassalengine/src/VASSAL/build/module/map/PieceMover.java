@@ -68,6 +68,7 @@ import VASSAL.build.Buildable;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GameComponent;
 import VASSAL.build.module.GlobalOptions;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.map.boardPicker.Board;
 import VASSAL.command.ChangeTracker;
@@ -84,6 +85,7 @@ import VASSAL.counters.DragBuffer;
 import VASSAL.counters.EventFilter;
 import VASSAL.counters.GamePiece;
 import VASSAL.counters.Highlighter;
+import VASSAL.counters.IBoundsTracker;
 import VASSAL.counters.KeyBuffer;
 import VASSAL.counters.PieceCloner;
 import VASSAL.counters.PieceFinder;
@@ -503,7 +505,7 @@ public class PieceMover extends AbstractBuildable
 
     Point offset = null;
     Command comm = new NullCommand();
-    final BoundsTracker tracker = new BoundsTracker();
+    final IBoundsTracker tracker = new BoundsTracker();
     // Map of Point->List<GamePiece> of pieces to merge with at a given
     // location. There is potentially one piece for each Game Piece Layer.
     final HashMap<Point,List<GamePiece>> mergeTargets =
@@ -1045,7 +1047,7 @@ public class PieceMover extends AbstractBuildable
 
         final GamePiece piece = dragContents.nextPiece();
         final Point pos = relativePositions.get(index++);
-        final Map map = piece.getMap();
+        final IMap map = piece.getMap();
 
         if (piece instanceof Stack){
           stackCount = 0;
@@ -1082,7 +1084,7 @@ public class PieceMover extends AbstractBuildable
 
     private StackMetrics getStackMetrics(GamePiece piece) {
       StackMetrics sm = null;
-      final Map map = piece.getMap();
+      final IMap map = piece.getMap();
       if (map != null) {
         sm = map.getStackMetrics();
       }

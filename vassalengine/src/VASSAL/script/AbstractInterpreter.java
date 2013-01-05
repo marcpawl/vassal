@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2008-2009 Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import VASSAL.build.GameModule;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.PlayerRoster;
 import VASSAL.build.module.PrivateMap;
@@ -150,7 +152,7 @@ public abstract class AbstractInterpreter extends Interpreter {
    * @return Map proxy
    */
   public VASSAL.script.proxy.Map findMap(String mapName) {
-    Map map = null;
+    IMap map = null;
     for (Map m : GameModule.getGameModule().getAllDescendantComponentsOf(
         Map.class)) {
       if (m.getMapName().equals(mapName) && isAccessible(m)) {
@@ -168,7 +170,7 @@ public abstract class AbstractInterpreter extends Interpreter {
    *          Map
    * @return true if accessible
    */
-  protected boolean isAccessible(Map m) {
+  protected boolean isAccessible(IMap m) {
     if (m instanceof PrivateMap) {
       String mySide = PlayerRoster.getMySide();
       if (mySide == null) {

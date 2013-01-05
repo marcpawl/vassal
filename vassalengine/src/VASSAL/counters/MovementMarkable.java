@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -42,6 +43,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import VASSAL.build.module.GlobalOptions;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.command.ChangeTracker;
@@ -232,7 +234,7 @@ public class MovementMarkable extends Decorator implements TranslatablePiece {
 
     public Component getControls() {
       boolean enabled = false;
-      for (Map m : Map.getMapList()) {
+      for (IMap m : Map.getMapList()) {
         String value = m.getAttributeValueString(Map.MARK_MOVED);
         enabled = enabled
             || GlobalOptions.ALWAYS.equals(value)

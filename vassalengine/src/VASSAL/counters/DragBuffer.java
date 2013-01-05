@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -32,7 +33,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 
 public class DragBuffer {
   private final static DragBuffer theBuffer = new DragBuffer();
@@ -41,7 +42,7 @@ public class DragBuffer {
   private MouseEvent lastRelease;
   private Component dropTarget;
   private MouseListener dropHandler;
-  private Map dragFromMap;
+  private IMap dragFromMap;
 
   private DragBuffer() { }
 
@@ -67,7 +68,7 @@ public class DragBuffer {
     }
   }
 
-  public Map getFromMap() {
+  public IMap getFromMap() {
     return dragFromMap;
   }
 

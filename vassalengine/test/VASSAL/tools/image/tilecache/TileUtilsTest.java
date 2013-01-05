@@ -19,23 +19,23 @@
 
 package VASSAL.tools.image.tilecache;
 
+import static VASSAL.tools.image.AssertImage.assertImageEquals;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.zip.GZIPOutputStream;
 
-import VASSAL.tools.image.ImageIOException;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-import static VASSAL.tools.image.AssertImage.*;
 
 public class TileUtilsTest {
 

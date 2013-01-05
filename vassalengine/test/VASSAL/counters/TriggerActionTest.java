@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2009 by Brent Easton
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -31,7 +32,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import VASSAL.build.module.Map;
+import VASSAL.build.module.IMap;
 import VASSAL.tools.NamedKeyStroke;
 
 @RunWith(value = Parameterized.class)
@@ -47,15 +48,15 @@ public class TriggerActionTest {
 
   final static String TRUE_EXPRESSION = "BasicName=";
   final static String FALSE_EXPRESSION = "BasicName=xyzzy";
-  final static Map MAP = mock(Map.class);
+  final static IMap MAP = mock(IMap.class);
   static TriggerAction trigger;
 
   String propertyExpression;
-  Map map;
+  IMap map;
   boolean result;
   String message;
 
-  public TriggerActionTest(String propertyExpression, Map map, boolean result, String message) {
+  public TriggerActionTest(String propertyExpression, IMap map, boolean result, String message) {
     this.propertyExpression = propertyExpression;
     this.map = map;
     this.result = result;

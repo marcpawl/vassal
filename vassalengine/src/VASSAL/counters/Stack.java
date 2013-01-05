@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -31,6 +32,7 @@ import java.util.Iterator;
 import VASSAL.build.BadDataReport;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GameState;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.map.StackMetrics;
 import VASSAL.command.Command;
@@ -53,7 +55,7 @@ public class Stack implements GamePiece, StateMergeable {
   private String id;
   private boolean expanded = false;
 
-  protected Map map;
+  protected IMap map;
   private static StackMetrics defaultMetrics;
 
   public Stack() {
@@ -567,11 +569,11 @@ public class Stack implements GamePiece, StateMergeable {
     return getProperty(key);
   }
 
-  public void setMap(Map map) {
+  public void setMap(IMap map) {
     this.map = map;
   }
 
-  public Map getMap() {
+  public IMap getMap() {
     return map;
   }
 
@@ -605,8 +607,8 @@ public class Stack implements GamePiece, StateMergeable {
     defaultMetrics = s;
   }
 
-  public StackMetrics getStackMetrics(Map m) {
-    return m == null ? getDefaultMetrics() : m.getStackMetrics();
+  public StackMetrics getStackMetrics(IMap iMap) {
+    return iMap == null ? getDefaultMetrics() : iMap.getStackMetrics();
   }
 
   public StackMetrics getStackMetrics() {

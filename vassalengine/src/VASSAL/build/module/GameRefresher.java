@@ -149,7 +149,7 @@ public final class GameRefresher implements GameComponent {
 
   private void processGamePiece(GamePiece piece, Command command) {
 
-    final Map map = piece.getMap();    
+    final IMap map = piece.getMap();    
     if (map == null) {
       logger.error("Can't refresh piece "+piece.getName()+": No Map");
       return;

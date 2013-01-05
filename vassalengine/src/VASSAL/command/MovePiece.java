@@ -1,24 +1,8 @@
-package VASSAL.command;
-
-import java.awt.Point;
-
-import VASSAL.build.GameModule;
-import VASSAL.build.module.GlobalOptions;
-import VASSAL.build.module.Map;
-import VASSAL.build.module.map.HighlightLastMoved;
-import VASSAL.counters.BoundsTracker;
-import VASSAL.counters.Deck;
-import VASSAL.counters.DeckVisitor;
-import VASSAL.counters.DeckVisitorDispatcher;
-import VASSAL.counters.GamePiece;
-import VASSAL.counters.PieceVisitorDispatcher;
-import VASSAL.counters.Properties;
-import VASSAL.counters.Stack;
-
 /*
  * $Id$
  *
  * Copyright (c) 2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -33,6 +17,25 @@ import VASSAL.counters.Stack;
  * License along with this library; if not, copies are available
  * at http://www.opensource.org.
  */
+
+package VASSAL.command;
+
+import java.awt.Point;
+
+import VASSAL.build.GameModule;
+import VASSAL.build.module.GlobalOptions;
+import VASSAL.build.module.Map;
+import VASSAL.build.module.map.HighlightLastMoved;
+import VASSAL.counters.BoundsTracker;
+import VASSAL.counters.Deck;
+import VASSAL.counters.DeckVisitor;
+import VASSAL.counters.DeckVisitorDispatcher;
+import VASSAL.counters.GamePiece;
+import VASSAL.counters.IBoundsTracker;
+import VASSAL.counters.PieceVisitorDispatcher;
+import VASSAL.counters.Properties;
+import VASSAL.counters.Stack;
+
 
 /**
  * Command that moves a piece to a new location and position within a stack.
@@ -109,7 +112,7 @@ public class MovePiece extends Command {
   protected void executeCommand() {
     GamePiece piece = GameModule.getGameModule().getGameState().getPieceForId(id);
     if (piece != null) {
-      BoundsTracker bounds = new BoundsTracker();
+      IBoundsTracker bounds = new BoundsTracker();
       bounds.addPiece(piece);
       Map newMap = Map.getMapById(newMapId);
       if (newMap != null) {

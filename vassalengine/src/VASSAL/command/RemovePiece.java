@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +23,7 @@ import java.awt.Rectangle;
 
 import VASSAL.build.GameModule;
 import VASSAL.build.module.GameState;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.map.HighlightLastMoved;
 import VASSAL.counters.GamePiece;
@@ -58,7 +60,7 @@ public class RemovePiece extends Command {
     undo = new AddPiece(target, target.getState());
 
     Rectangle r = null;
-    final Map m = target.getMap();
+    final IMap m = target.getMap();
     final Stack parent = target.getParent();
 
     // Highlight the stack the piece was removed from - Ben

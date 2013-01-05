@@ -2,6 +2,7 @@
  * $Id$
  *
  * Copyright (c) 2000-2003 by Rodney Kinney
+ * Copyright (c) 2013 by Marc Pawlowsky
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -49,6 +50,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 import VASSAL.build.GameModule;
+import VASSAL.build.module.IMap;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.map.Drawable;
@@ -120,7 +122,7 @@ public class FreeRotator extends Decorator
   protected Point pivot;
   protected boolean drawGhost;
 
-  protected Map startMap;
+  protected IMap startMap;
   protected Point startPosition;
 
   public FreeRotator() {
@@ -133,8 +135,7 @@ public class FreeRotator extends Decorator
     setInner(inner);
   }
 
-
-public String getName() {
+  public String getName() {
     return piece.getName();
   }
 
@@ -543,7 +544,7 @@ public void beginInteractiveRotate() {
    * rotate mode was turned on?
    */
   public boolean hasPieceMoved() {
-    final Map m = getMap();
+    final IMap m = getMap();
     final Point p = getPosition();
     return m == null || m != startMap || p == null || !p.equals(startPosition);
   }
@@ -577,7 +578,7 @@ public void beginInteractiveRotate() {
       return;
     }
 
-    final Map m = getMap();
+    final IMap m = getMap();
 
     try {
       final Point ghostPosition = getGhostPosition();
