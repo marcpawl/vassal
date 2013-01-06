@@ -155,4 +155,10 @@ public interface GamePiece extends PropertySource {
   public void setProperty(Object key, Object val);
 
   public Object getProperty(Object key);
+
+  /**
+   * Retrieve all the names of the properties that can be retrieved.
+   * @return List of the property names.
+   */
+  public List<String> getPropertyNames();
 }

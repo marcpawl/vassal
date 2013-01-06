@@ -23,6 +23,7 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.Window;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -444,7 +445,17 @@ public abstract class Decorator implements GamePiece, StateMergeable, PropertyNa
    * Default Property Name Source
    */
   public List<String> getPropertyNames() {
-    return new ArrayList<String>(0);
+    List<String> result = new LinkedList<String>();
+    
+    List<String> pieceNames = this.piece.getPropertyNames();
+    result.addAll(pieceNames);
+    
+    result.add(Properties.KEY_COMMANDS);
+    result.add(Properties.INNER);
+    result.add(Properties.OUTER);
+    result.add(Properties.VISIBLE_STATE);
+    
+    return result;
   }
 
   /**

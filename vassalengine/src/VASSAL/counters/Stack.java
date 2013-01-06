@@ -28,6 +28,7 @@ import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.KeyStroke;
@@ -573,6 +574,12 @@ public class Stack implements GamePiece, StateMergeable {
     for (Enumeration<GamePiece> e = getPieces(); e.hasMoreElements();) {
       e.nextElement().setProperty(key, val);
     }
+  }
+
+  public List<String> getPropertyNames() {
+	  // Since there are no properties that can be retrieved
+	  // or set return an empty list.
+	  return new LinkedList<String>();
   }
 
   public Object getProperty(Object key) {

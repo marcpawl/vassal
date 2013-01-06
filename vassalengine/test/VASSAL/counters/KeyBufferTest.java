@@ -22,7 +22,6 @@ package VASSAL.counters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.awt.Component;
 import java.awt.Graphics;
@@ -204,6 +203,10 @@ public class KeyBufferTest
 		}
 
 		public Object getProperty(Object key) {
+			throw new Error("Method should not be called in test");
+		}
+
+		public List<String> getPropertyNames() {
 			throw new Error("Method should not be called in test");
 		}
 		
